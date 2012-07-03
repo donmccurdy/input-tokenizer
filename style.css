@@ -52,11 +52,9 @@ body {
 
 .focusField{  
         box-shadow:0px 0px 10px #5c7db7;  
-        background:#f8faff;
         border: solid 2px transparent;
 }  
 .idleField{  
-        background:#f8faff;  
         border: solid 2px #DFDFDF;  
 }
 
