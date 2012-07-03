@@ -7,9 +7,9 @@ My implementation is pretty simple - there are admittedly some more robust and/o
 
 Screenshot:
 
-![A screenshot of the input form.](http://www.donmccurdy.net/sandbox/tag_editor/screenshot.png)
+![A screenshot of the input form.](http://www.donmccurdy.net/sandbox/tag_editor/demo/screenshot.png)
 
-For a live demo, check here: http://www.donmccurdy.net/sandbox/tag_editor/
+For a live demo, check here: http://www.donmccurdy.net/sandbox/tag_editor/demo/
 
 - - -
 
@@ -25,7 +25,7 @@ To get started, here are the steps:
 * Next, download the .CSS and .JS files from GitHub, and include them as well:
 
 ```html
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="input_style.css" />
     <script type="text/javascript" src="scripts.js"></script>
 ```
 
@@ -42,6 +42,7 @@ To get started, here are the steps:
 
 ```html
     <div class="inputWrapper">
+        <span class="tokenListLabel">Tags:</span>
         <div class="tokenList"></div>
         <input type="text" class="tokenInput" />
     </div>
@@ -53,6 +54,7 @@ To get started, here are the steps:
 
 If this is a bit more basic than you need, there are some great plugins others have put together available. Try these, for starters:
 
+* http://aehlke.github.com/tag-it/ (recommended)
 * http://xoxco.com/projects/code/tagsinput/
 * http://loopj.com/jquery-tokeninput/
 * http://tagedit.webwork-albrecht.de/
