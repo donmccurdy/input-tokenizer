@@ -5,6 +5,10 @@ jQuery widget that allows a user to type keywords, which will be broken up into 
 
 My implementation is pretty simple - there are admittedly some more robust and/or customizable jQuery plugins out there that do this. Mostly, I just wanted to take a shot at doing this myself, from scratch.
 
+Screenshot:
+
+![A screenshot of the input form.](http://www.donmccurdy.net/sandbox/tag_editor/screenshot.png)
+
 For a live demo, check here: http://www.donmccurdy.net/sandbox/tag_editor/
 
 - - -
