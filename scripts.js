@@ -14,7 +14,7 @@ $(document).ready(function() {
     });  
     $('input[type="text"]').blur(function() { 
     	addToken($(this), $(this).parent());
-    	this.value = ""; 
+    	addToken($(this), $(this).parent());
         $(this).parent().removeClass("focusField").addClass("idleField");
     }); 
     
@@ -43,11 +43,23 @@ $(document).ready(function() {
 
 /*********** FUNCTIONS ************/
 
+function appendToken(text, wrapper) {
+	wrapper.children(".tokenList").append($("#tokenTemplate").clone().attr("id", "").children(".tokenLabel").append(text).parent());
+}
 
 function addToken(input, wrapper) {
 	if (input.val() != "") {
-		wrapper.children(".tokenList").append($("#tokenTemplate").clone().attr("id", "").children(".tokenLabel").append(input.val()).parent());
-		input.attr("value", "");
+		input.attr("value", input.val().replace(/[ ,\n]+/g, " ").trim());
+		var	tokens = input.val().split(" ");
+		for (i = 0; i < tokens.length - 1; i++) {
+			appendToken(tokens[i], wrapper)
+		}
+		if (tokens.length > 1) {
+			input.attr("value",tokens[tokens.length - 1]);
+		} else {
+			appendToken(tokens[tokens.length - 1], wrapper);
+			input.attr("value","");
+		}
 	}
 }
 
