@@ -7,7 +7,7 @@ My implementation is pretty simple - there are admittedly some more robust and/o
 
 Screenshot:
 
-![A screenshot of the input form.](http://www.donmccurdy.net/sandbox/tag_editor/demo/screenshot.png)
+![A screenshot of the input form.](http://www.donmccurdy.net/sandbox/tag_editor/demo/screenshot2.png)
 
 For a live demo, check here: http://www.donmccurdy.net/sandbox/tag_editor/demo/
 
