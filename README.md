@@ -51,7 +51,7 @@ To get started, here are the steps:
 
 - - -
 
-If this is a bit more basic than you need, there are some great plugins others have put together out there. Try these, for starters:
+If this is a bit more basic than you need, there are some great plugins others have put together available. Try these, for starters:
 
 * http://xoxco.com/projects/code/tagsinput/
 * http://loopj.com/jquery-tokeninput/
@@ -59,4 +59,4 @@ If this is a bit more basic than you need, there are some great plugins others h
 
 - - -
 
-Created by Don McCurdy. Mid-2012. Do feel free to use this for whatever you like, although I'd appreciate it if you'd either cite me or let me know that you found my code helpful, so I can feel better about myself and stuff. Thanks! 
+Created by Don McCurdy. Do feel free to use this for whatever you want, although I'd appreciate it if you'd either cite me or let me know if you find a cool use for my code. Thanks! 
