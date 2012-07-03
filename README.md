@@ -11,23 +11,39 @@ For a live demo, check here: http://www.donmccurdy.net/sandbox/tag_editor/
 
 To get started, here are the steps:
 
-* First, you'll need jQuery and (optionally) this one font that I like. Put these lines in your <head></head> section.
-*    <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
-*    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" ></script>
+* First, you'll need jQuery and (very optionally) this one font that I like. Put these lines in your HTML header.
+
+```html
+    <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" ></script>
+```
+
 * Next, download the .CSS and .JS files from GitHub, and include them as well:
-*    <link rel="stylesheet" type="text/css" href="style.css" />
-*    <script type="text/javascript" src="scripts.js"></script>
+
+```html
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script type="text/javascript" src="scripts.js"></script>
+```
+
 * You'll need to put a template token object somewhere in your page. With the default CSS stylesheet, "display:none" is automatically applied. The template looks like this:
-*    <div class="token" id="tokenTemplate">
-		    <span class="tokenLabel"></span>
-		    <span class="tokenRemove" onclick="removeToken($(this));">(x)</span>
-		</div>
-* Finally, put the token input into your page. Like this:
-*    <div class="inputWrapper" id="myTokenField">
-			<div class="tokenList"></div>
-			<input type="text" class="tokenInput" id="myTokenInput" />
-		</div>
-* You're done! Mess around with the CSS if you like.
+
+```html
+    <div class="token" id="tokenTemplate">
+        <span class="tokenLabel"></span>
+        <span class="tokenRemove" onclick="removeToken($(this));">(x)</span>
+    </div>
+```
+
+* Finally, add the input form to your page. Like this:
+
+```html
+    <div class="inputWrapper">
+        <div class="tokenList"></div>
+        <input type="text" class="tokenInput" />
+    </div>
+```
+
+* You're done! Mess around with the CSS if you want to restyle things a bit.
 
 - - -
 
