@@ -39,17 +39,21 @@ body {
 /** INPUT FORMATTING **/
  
 .tokenInput {
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: inherit;
     width: 112px;
     margin: 2px;
-    height: 2em;
     float: left;
     border: none;
+    outline: none;
 	background: transparent;
 } 
 
 .focusField{  
         box-shadow:0px 0px 10px #5c7db7;  
-        background:#f8faff;  
+        background:#f8faff;
+        border: solid 2px transparent;
 }  
 .idleField{  
         background:#f8faff;  
