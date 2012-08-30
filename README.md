@@ -29,15 +29,6 @@ To get started, here are the steps:
     <script type="text/javascript" src="scripts.js"></script>
 ```
 
-* You'll need to put a template token object somewhere in your page. With the default CSS stylesheet, "display:none" is automatically applied. The template looks like this:
-
-```html
-    <div class="token" id="tokenTemplate">
-        <span class="tokenLabel"></span>
-        <span class="tokenRemove" onclick="removeToken($(this));">(x)</span>
-    </div>
-```
-
 * Finally, add the input form to your page. Like this:
 
 ```html
