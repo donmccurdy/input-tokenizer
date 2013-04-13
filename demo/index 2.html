@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tag Editor Demo</title>
+	<link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="page_style.css" />	
+	<link rel="stylesheet" type="text/css" href="../input_style.css" />	
+	<link rel="stylesheet" href="gh-fork-ribbon.css" />
+	<!--[if IE]>
+		<link rel="stylesheet" href="gh-fork-ribbon.ie.css" />
+	<![endif]-->
+
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" ></script>
+	<script type="text/javascript" src="../Tokenizer.js"></script>
+	<!--[if lt IE 9]><script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script><![endif]-->
+	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+</head>
+<body>
+	<div class="github-fork-ribbon-wrapper right">
+	    <div class="github-fork-ribbon">
+	        <a href="https://github.com/donmccurdy/input-tokenizer">Fork me on GitHub</a>
+	    </div>
+	</div>
+	<section class="main">   
+		
+		<input type="text">
+		
+	</section>
+
+	<!-- Template used to generate tokens -->
+    <section class="templates" style="display:none">
+		<div class="token" id="tokenTemplate">
+		    <span class="tokenLabel"></span>
+		    |
+		    <span class="tokenRemove" onclick="removeToken($(this));"> X</span>
+		</div>
+	</section>
+</body>
+</html>
