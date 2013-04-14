@@ -12,7 +12,6 @@
 			list,
 			wrap,
 			options = $.extend({
-				showX: true,
 				xContent: '&times;',
 				namespace: 'tknz',
 				label: 'Tags:',
