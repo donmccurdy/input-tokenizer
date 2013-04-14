@@ -1,64 +1,74 @@
-/** GENERAL LAYOUT **/
+/** 
+ * Example styling for tokenizer plugin.
+ * Prefix may be overriden with 'namespace' option.
+ * Don McCurdy, 2013.
+ */
 
-.inputWrapper {
+.tknz-wrapper { /* The apparent input */
      width: 350px;
      height: 250px;
-     background: #fefefe; 
      margin: 50px auto;
-     padding: 10px;    
+     padding: 10px; 
+     overflow: auto;
+
+     color: #fefefe;
+     background: #fefefe; 
+     font-family: "Courier", Times, sans-serif;
+        
+     border: solid 2px #DFDFDF; 
      border-radius:10px; 
-     font-family: "Quicksand", Times, sans-serif;
-	 font-weight: 400;
-	 color: #fefefe;
-	 overflow-y: auto;
-	 overflow-x: auto;
 }
 
-.token {
-    background: #5c7db7;
-    padding: 2px 2px 2px 5px; 
-    margin: 2px; 
+.tknz-focus{ /* Apparent input in active state */
+    box-shadow: 0px 0px 6px #5c7db7;  
+    border: solid 2px transparent;
+}
+
+.tknz-wrapper-label { /* Label for the field */
     float: left;
-    border-radius: 4px;
-    cursor: default;
+    color: #000;
+    margin: 5px 5px 0 2px;
 }
 
-.tokenListLabel {
-	float: left;
-	color: #000;
-	margin: 5px 5px 0 2px;
-}
-
-.tokenRemove:hover {
-	text-shadow: 0px 0px 6px #fff;
-}
- 
-/** INPUT FORMATTING **/
- 
-.tokenInput {
-	font-family: inherit;
-	font-size: inherit;
-	font-weight: inherit;
+.tknz-input { /* The actual input */
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
     width: 112px;
     margin: 2px;
     float: left;
     border: none;
     outline: none;
-	background: transparent;
-} 
+    background: transparent;
+}
 
-.focusField{  
-        box-shadow:0px 0px 10px #5c7db7;  
-        border: solid 2px transparent;
-}  
-.idleField{  
-        border: solid 2px #DFDFDF;  
+.tknz-token { /* An individual token */
+    background: #5c7db7;
+    padding: 2px 2px 2px 5px; 
+    margin: 2px; 
+    float: left;
+    border-radius: 4px;
+    max-width: 340px;
+}
+
+.tknz-token-label { /* Token's label */
+    word-break: break-word;
+}
+
+.tknz-token-x { /* Delete button for token */
+    cursor: pointer;
+    color: rgba(255,255,255, 0.5);
+    padding-left: 7px;
+}
+.tknz-token-x:hover {
+	text-shadow: 0px 0px 3px #eee;
+    color: #fff;
 }
 
 /** MEDIA **/
 
 @media screen and (max-width: 480px) {
-	.inputWrapper {
+	.tknz-input {
 		width: 90%;
 	}
 }

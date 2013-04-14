@@ -1,49 +1,110 @@
 Input Tokenizer
 ===============
 
-jQuery widget that allows a user to type keywords, which will be broken up into tokens/tags and displayed separately. It's what you'd expect to see when tagging a post on Tumblr or Stack-Overflow.
+Demo: http://www.donmccurdy.com/sandbox/tag_editor/demo/
 
-My implementation is pretty simple - there are admittedly some more robust and/or customizable jQuery plugins out there that do this. Mostly, I just wanted to take a shot at doing this myself, from scratch.
+jQuery plugin that stylizes an input and allows a user to type keywords, which will be broken up into tokens/tags and displayed separately. 
+
+It's what you'd expect to see when tagging a post on Tumblr or Stack-Overflow. Mostly, I just wanted to take a shot at doing this myself, from scratch.
 
 Screenshot:
 
 ![A screenshot of the input form.](http://www.donmccurdy.net/sandbox/tag_editor/demo/screenshot3.png)
 
-For a live demo, check here: http://www.donmccurdy.net/sandbox/tag_editor/demo/
-
 - - -
+
+## Getting Started
 
 To get started, here are the steps:
 
-* First, you'll need jQuery and (very optionally) this one font that I like. Put these lines in your HTML header.
+* First, you'll need jQuery and my plugin. jQuery should be included first, and the path to the plugin will depend on where you put it. For example, put this between the \<head\>\</head\> tags of your HTML:
 
 ```html
-    <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" ></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+<script type="text/javascript" src="tokenizer.js"></script>
 ```
 
-* Next, download the .CSS and .JS files from GitHub, and include them as well:
+* Next, copy my sample CSS or tweak it to your needs, then include it as well:
 
 ```html
-    <link rel="stylesheet" type="text/css" href="input_style.css" />
-    <script type="text/javascript" src="scripts.js"></script>
+<link rel="stylesheet" type="text/css" href="input_style.css" />
 ```
 
-* Finally, add the input form to your page. Like this:
+* Finally, call the plugin on your input at the end of your \<body\>\</body\> tag contents or once the page has loaded. If you've added the ".myTokenInput" class to yours, you might do something like this:
 
 ```html
-    <div class="inputWrapper">
-        <span class="tokenListLabel">Tags:</span>
-        <div class="tokenList"></div>
-        <input type="text" class="tokenInput" />
-    </div>
+<script type="text/javascript">
+	var tokenInput = $('input.myTokenInput').tokenizer({ /* options */ });
+</script>
 ```
 
 * You're done! Mess around with the CSS if you want to restyle things a bit.
 
 - - -
 
-If this is a bit more basic than you need, there are some great plugins others have put together available. Try these, for starters:
+## Methods and Options
+
+* If you need to do real work with this plugin, you'll probably want to know the methods and options. Here they are:
+
+```javascript
+// Initialize with default options
+var $input = $(input).tokenizer({});
+
+// Initialize with some custom options:
+var options = {
+	/* custom options here */
+}
+$input2 = $(input2).tokenizer(options);
+
+```
+
+Available options:
+
+```javascript
+{
+	xContent: '&times;', 		// content of the delete button
+	namespace: 'tknz', 		// used as CSS prefix and event namespace
+	label: 'Tags:', 		// label at top of input
+	
+	separators: [',', ' ', '.'], 	// trigger characters to separate tokens. 
+				  	// 	Use [',', '.'] to allow multiple words per tag.
+				  	
+	callback: function () {} 	// function to call when the token list changes. 
+					// 	The $(input) element is included as a parameter.
+}
+```
+
+
+Available methods:
+
+```javascript
+
+// 'get' - return list of tokens
+var list = $input.tokenizer('get'); 	// ['unbought','stuffed','dogs']
+
+// 'push' - Manually add a token
+$input.tokenizer('push', 'YOLO'); // adds 'YOLO' as a token.
+
+// 'pop' - Get the most recent token
+var lastToken = $input.tokenizer('pop'); // returns last token in list.
+
+// 'empty' - Clear the input
+$input.tokenizer('empty'); // token list is now empty.
+
+// 'destroy' - Un-tokenize the input (returns everything to pre-plugin state)
+$input.tokenizer('destroy'); // just an everyday input now.
+
+// 'callback' - Manually trigger the callback function
+$input.tokenizer('callback'); // triggers provided callback, if any.
+
+
+```
+
+- - -
+
+## Other Notes
+
+If this isn't what you need, there are other great options out there. Try these:
 
 * http://aehlke.github.com/tag-it/ (recommended)
 * http://xoxco.com/projects/code/tagsinput/
@@ -52,4 +113,17 @@ If this is a bit more basic than you need, there are some great plugins others h
 
 - - -
 
-Created by Don McCurdy. Do feel free to use this for whatever you want, although I'd appreciate it if you'd either cite me or let me know if you find a cool use for my code. Thanks! 
+## Open Source License
+
+Open source under MIT License (see below). I'd love to hear about it if you find a cool use for my code. Thanks! 
+
+- - -
+
+The MIT License (MIT)
+Copyright (c) 2013 Don McCurdy
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
