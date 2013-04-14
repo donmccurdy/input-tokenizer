@@ -13,9 +13,11 @@ Screenshot:
 
 - - -
 
+## Getting Started
+
 To get started, here are the steps:
 
-* First, you'll need jQuery and my plugin. jQuery should be included first, and the path to the plugin will depend on where you put it. For example, put this between the '''html <head></head>''' tags of your HTML:
+* First, you'll need jQuery and my plugin. jQuery should be included first, and the path to the plugin will depend on where you put it. For example, put this between the \<head\>\</head\> tags of your HTML:
 
 ```html
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
@@ -28,7 +30,7 @@ To get started, here are the steps:
 <link rel="stylesheet" type="text/css" href="input_style.css" />
 ```
 
-* Finally, call the plugin on your input(s). If you've added the ".myTokenInput" class to yours, you might do something like this:
+* Finally, call the plugin on your input at the end of your \<body\>\</body\> tag contents or once the page has loaded. If you've added the ".myTokenInput" class to yours, you might do something like this:
 
 ```html
 <script type="text/javascript">
@@ -38,13 +40,27 @@ To get started, here are the steps:
 
 * You're done! Mess around with the CSS if you want to restyle things a bit.
 
+- - -
+
+## Methods and Options
+
 * If you need to do real work with this plugin, you'll probably want to know the methods and options. Here they are:
 
 ```javascript
 // Initialize with default options
 $(input).tokenizer({});
 
-// Default options:
+// Initialize with some custom options:
+var options = {
+	/* custom options here */
+}
+$(input).tokenizer(options);
+
+```
+
+Available options:
+
+```javascript
 {
 	xContent: '&times;', 		// content of the delete button
 	namespace: 'tknz', 		// used as CSS prefix and event namespace
@@ -53,41 +69,40 @@ $(input).tokenizer({});
 	separators: [',', ' ', '.'], 	// trigger characters to separate tokens. 
 				  	// 	Use [',', '.'] to allow multiple words per tag.
 				  	
-	callback: null 			// function to call when the token list changes. 
+	callback: function () {} 	// function to call when the token list changes. 
 					// 	The $(input) element is included as a parameter.
 }
+```
 
-// Initialize with some custom options:
-var options = {
-	label: 'Genres:',
-	callback: function (input) {
-		alert('Your genres: ' + input.tokenizer('get').join(', ') + '.');
-	}
-}
-$(input).tokenizer(options);
 
-// Get list of tokens
-var list = $(input).tokenizer('get'); 	// ['unsought','stuffed','dogs']
+Available methods:
 
-// Manually add a token
+```javascript
+
+// 'get' - return list of tokens
+var list = $(input).tokenizer('get'); 	// ['unbought','stuffed','dogs']
+
+// 'push' - Manually add a token
 $(input).tokenizer('push', 'YOLO'); // adds 'YOLO' as a token.
 
-// Get the most recent token
+// 'pop' - Get the most recent token
 var lastToken = $(input).tokenizer('pop'); // returns last token in list.
 
-// Clear the input
+// 'empty' - Clear the input
 $(input).tokenizer('empty'); // token list is now empty.
 
-// Un-tokenize the input (returns everything to pre-plugin state)
+// 'destroy' - Un-tokenize the input (returns everything to pre-plugin state)
 $(input).tokenizer('destroy'); // just an everyday input now.
 
-// Manually trigger the callback function
+// 'callback' - Manually trigger the callback function
 $(input).tokenizer('callback'); // triggers provided callback, if any.
 
 
 ```
 
 - - -
+
+## Other Notes
 
 If this isn't what you need, there are other great options out there. Try these:
 
@@ -98,7 +113,9 @@ If this isn't what you need, there are other great options out there. Try these:
 
 - - -
 
-Created by Don McCurdy. Open source under MIT License (see below). I'd love to hear about it if you find a cool use for my code. Thanks! 
+## Open Source License
+
+Open source under MIT License (see below). I'd love to hear about it if you find a cool use for my code. Thanks! 
 
 - - -
 
