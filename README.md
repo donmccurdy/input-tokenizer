@@ -48,13 +48,13 @@ To get started, here are the steps:
 
 ```javascript
 // Initialize with default options
-$(input).tokenizer({});
+var $input = $(input).tokenizer({});
 
 // Initialize with some custom options:
 var options = {
 	/* custom options here */
 }
-$(input).tokenizer(options);
+$input2 = $(input2).tokenizer(options);
 
 ```
 
@@ -80,22 +80,22 @@ Available methods:
 ```javascript
 
 // 'get' - return list of tokens
-var list = $(input).tokenizer('get'); 	// ['unbought','stuffed','dogs']
+var list = $input.tokenizer('get'); 	// ['unbought','stuffed','dogs']
 
 // 'push' - Manually add a token
-$(input).tokenizer('push', 'YOLO'); // adds 'YOLO' as a token.
+$input.tokenizer('push', 'YOLO'); // adds 'YOLO' as a token.
 
 // 'pop' - Get the most recent token
-var lastToken = $(input).tokenizer('pop'); // returns last token in list.
+var lastToken = $input.tokenizer('pop'); // returns last token in list.
 
 // 'empty' - Clear the input
-$(input).tokenizer('empty'); // token list is now empty.
+$input.tokenizer('empty'); // token list is now empty.
 
 // 'destroy' - Un-tokenize the input (returns everything to pre-plugin state)
-$(input).tokenizer('destroy'); // just an everyday input now.
+$input.tokenizer('destroy'); // just an everyday input now.
 
 // 'callback' - Manually trigger the callback function
-$(input).tokenizer('callback'); // triggers provided callback, if any.
+$input.tokenizer('callback'); // triggers provided callback, if any.
 
 
 ```
