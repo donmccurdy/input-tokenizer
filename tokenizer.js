@@ -6,21 +6,27 @@
 (function ($) {
 
 	var Tokenizer = function (argElement, argOpts) {
+
 		// PRIVATE VARS
 		var
 			input, 
 			list,
 			wrap,
+			suggestions,
 			options = $.extend({
 				xContent: '&times;',
 				namespace: 'tknz',
 				label: 'Tags:',
 				separators: [',', ' ', '.'],
-				callback: null
+				callback: null,
+				source: ['one','two','three','four','five'],
+				allowUnknownTags: true,
+				numToSuggest: 5
 			}, argOpts);
 
 		// PRIVATE METHODS
-		var init, buildHTML, bindEvents, push, pop, get, empty, destroy, callback;
+		var init, buildHTML, bindEvents, push, pop, get, empty, 
+			destroy, callback, suggest, getMatch, tryPush;
 
 		init = function () {
 			input = argElement;
@@ -30,12 +36,14 @@
 		buildHTML = function () {
 			var ns = options.namespace;
 		  	list = $('<div class="'+ns+'-list"></div>');
+		  	suggestions = $('<div class="'+ns+'-suggest"><ul></ul></div>');
 			wrap = input
 				.addClass(ns+'-input')
 			 	.wrap('<div class="'+ns+'-wrapper"></div>')
 			 	.parent()
 				.prepend(list)
-				.prepend('<span class="'+ns+'-wrapper-label">'+options.label+'</span>');
+				.prepend('<span class="'+ns+'-wrapper-label">'+options.label+'</span>')
+				.append(suggestions);
 		};
 		bindEvents = function () {
 			var ns = options.namespace;
@@ -58,20 +66,37 @@
 			 		var val = input.val();
 					if (options.separators.indexOf(String.fromCharCode(event.which)) > -1 || event.which === 13) {
 						event.preventDefault();
-						if (val) { 
-							push(val); 
-							callback();
-						}
-						input.val('');
+						tryPush(val);
+					} else if (event.which === 38) { // Up
+
+					} else if (event.which === 40) { // Down
+						
+					}  else if ($.isArray(options.source)) { // Autosuggest from list
+						suggest(val, options.source);
+					} else if (options.source) { // Autosuggest from function
+						options.source(val, suggest);
 					}
 				}).on('click.'+ns, function () {	// On click, focus the input.
 					input.focus();
 				}).on('click.'+ns, '.'+ns+'-token-x', function () {
 					$(this).closest('.'+ns+'-token').remove();
 					callback();
+				}).on('click.'+ns, '.'+ns+'-suggest-li', function () {
+					input.val('');
+					push($(this).text());
+					suggestions.children('ul').empty().removeClass('.'+ns+'-vis');
+					callback();
 				});
 		};
 
+		tryPush = function (value) {
+			var match = getMatch();
+			if (value && (options.allowUnknownTags || match)) { 
+				push(match || value); 
+				callback();
+				input.val('');
+			}
+		};
 		push = function (value) {
 		  	var
 		  		ns = options.namespace, 
@@ -106,6 +131,24 @@
 		callback = function () {
 			(options.callback || $.noop)(input);
 			return input;
+		};
+		suggest = function (word, words) {
+			var 
+				i, 
+				ns = options.namespace,
+				re = new RegExp('^'+word+'$', 'i'),
+				limit = options.numToSuggest || 1000,
+				list = '';
+			for (i = 0; i < words.length && i < limit; i++) {
+				list += '<li class=".'+ns+'-suggest-li'+
+					(words[i].match(re) ? ' '+ns+'-sel' : '')+'">'+words[i]+'</li>';
+			}
+			suggestions.children('ul')
+				.html(list)
+				[list ? 'addClass' : 'removeClass']('.'+ns+'-vis');
+		};
+		getMatch = function () {
+			return suggestions.find('.'+options.namespace+'-sel').eq(0);
 		};
 		
 		init (argElement);
