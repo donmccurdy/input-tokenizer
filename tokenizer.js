@@ -68,13 +68,15 @@
 						event.preventDefault();
 						tryPush(val);
 					} else if (event.which === 38) { // Up
-
+						console.log('up');
 					} else if (event.which === 40) { // Down
-						
-					}  else if ($.isArray(options.source)) { // Autosuggest from list
-						suggest(val, options.source);
+						console.log('down');
+					}
+				}).on('keyup.'+ns, 'input', function (event) {
+					if ($.isArray(options.source)) { // Autosuggest from list
+						suggest(input.val(), options.source);
 					} else if (options.source) { // Autosuggest from function
-						options.source(val, suggest);
+						options.source(input.val(), suggest);
 					}
 				}).on('click.'+ns, function () {	// On click, focus the input.
 					input.focus();
@@ -93,8 +95,8 @@
 			var match = getMatch();
 			if (value && (options.allowUnknownTags || match)) { 
 				push(match || value); 
-				callback();
 				input.val('');
+				callback();
 			}
 		};
 		push = function (value) {
@@ -136,19 +138,21 @@
 			var 
 				i, 
 				ns = options.namespace,
-				re = new RegExp('^'+word+'$', 'i'),
+				re1 = new RegExp(word, 'i'),
+				re2 = new RegExp('^'+word+'$', 'i'),
 				limit = options.numToSuggest || 1000,
 				list = '';
-			for (i = 0; i < words.length && i < limit; i++) {
-				list += '<li class=".'+ns+'-suggest-li'+
-					(words[i].match(re) ? ' '+ns+'-sel' : '')+'">'+words[i]+'</li>';
+			for (i = 0; word && i < words.length && i < limit; i++) {
+				if (!words[i].match(re1)) { continue; }
+				list += '<li class="'+ns+'-suggest-li'+
+					(words[i].match(re2) ? ' '+ns+'-sel' : '')+'">'+words[i]+'</li>';
 			}
 			suggestions.children('ul')
 				.html(list)
 				[list ? 'addClass' : 'removeClass']('.'+ns+'-vis');
 		};
 		getMatch = function () {
-			return suggestions.find('.'+options.namespace+'-sel').eq(0);
+			return suggestions.find('.'+options.namespace+'-sel').eq(0).text();
 		};
 		
 		init (argElement);
