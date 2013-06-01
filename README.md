@@ -3,9 +3,11 @@ Input Tokenizer
 
 Demo: http://www.donmccurdy.com/sandbox/tag_editor/demo/
 
-jQuery plugin that stylizes an input and allows a user to type keywords, which will be broken up into tokens/tags and displayed separately. 
+jQuery plugin that stylizes an input and allows a user to type keywords, which will be 
+broken up into tokens/tags and displayed separately. 
 
-It's what you'd expect to see when tagging a post on Tumblr or Stack-Overflow. Mostly, I just wanted to take a shot at doing this myself, from scratch.
+It's what you'd expect to see when tagging a post on Tumblr or Stack-Overflow. Mostly, I 
+just wanted to do this myself, from scratch.
 
 Screenshot:
 
