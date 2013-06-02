@@ -94,7 +94,7 @@
 		  		}).on('keyup', 'input', function (event) {
 		  			if (event.which === 38 || event.which === 40) { return; }
 					if ($.isArray(options.source)) { // Autosuggest from list
-						suggest(input.val(), options.source);
+						suggest(options.source);
 					} else if (options.source) { // Autosuggest from function
 						options.source(input.val(), suggest);
 					}
@@ -107,7 +107,7 @@
 				}).on('click', '.'+ns+'-suggest-li', function () {
 					input.val('');
 					push($(this).text());
-					suggest('', []);
+					suggest([]);
 					callback();
 				}).on('click', '.'+ns+'-token', function (event) {
 					if (options.onclick) { 
@@ -124,7 +124,7 @@
 					input.val('');
 					callback();
 				}
-				suggest('', []);
+				suggest([], '');
 			};
 			push = function (value) {
 				var
@@ -163,7 +163,8 @@
 				(options.callback || $.noop)(input);
 				return input;
 			};
-			suggest = function (word, words) {
+			suggest = function (words, word) {
+				word = word === undefined ? input.val() : word;
 				var 
 				i, 
 				ns = options.namespace,

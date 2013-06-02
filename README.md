@@ -1,7 +1,13 @@
-Input Tokenizer
+Tag / Token Input
 ===============
 
-Demo: http://www.donmccurdy.com/sandbox/tag_editor/demo/
+*Features*: Optional autosuggest, custom callbacks, easy setup, custom CSS prefixing.
+
+*Demo*: http://www.donmccurdy.com/sandbox/tag_editor/demo/
+
+*Size*: 1.6kb gzipped, 3.9kb minified.
+
+*Dependencies*: jQuery 1.8-2.0+. (I haven't tested below 1.8, but it might work...)
 
 jQuery plugin that stylizes an input and allows a user to type keywords, which will be 
 broken up into tokens/tags and displayed separately. 
@@ -19,7 +25,9 @@ Screenshot:
 
 To get started, here are the steps:
 
-* First, you'll need jQuery and my plugin. jQuery should be included first, and the path to the plugin will depend on where you put it. For example, put this between the \<head\>\</head\> tags of your HTML:
+* First, you'll need jQuery and my plugin. jQuery should be included first, 
+and the path to the plugin will depend on where you put it. 
+For example, put this between the \<head\>\</head\> tags of your HTML:
 
 ```html
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
@@ -32,7 +40,9 @@ To get started, here are the steps:
 <link rel="stylesheet" type="text/css" href="input_style.css" />
 ```
 
-* Finally, call the plugin on your input at the end of your \<body\>\</body\> tag contents or once the page has loaded. If you've added the ".myTokenInput" class to yours, you might do something like this:
+* Finally, call the plugin on your input at the end of your \<body\>\</body\> tag 
+contents or once the page has loaded. If you've added the ".myTokenInput" class 
+to yours, you might do something like this:
 
 ```html
 <script type="text/javascript">
@@ -46,7 +56,8 @@ To get started, here are the steps:
 
 ## Methods and Options
 
-* If you need to do real work with this plugin, you'll probably want to know the methods and options. Here they are:
+* If you need to do real work with this plugin, you'll probably want to know the 
+methods and options. Here they are:
 
 ```javascript
 // Initialize with default options
@@ -64,15 +75,29 @@ Available options:
 
 ```javascript
 {
-	xContent: '&times;', 		// content of the delete button
-	namespace: 'tknz', 		// used as CSS prefix and event namespace
-	label: 'Tags:', 		// label at top of input
+	source: null, 	// autosuggest options. May be a method or a function.
+					// If a function is given, it should take parameters: 
+					// the first will be the input word, the second is a function which should be called
+					// with a list of terms to suggest. (If you're using Ajax, call this function after your 
+					// response from the server is received.)
+
+	allowUnknownTags: true, // if false, prevents user from creating tags not on the autosuggest list
+	numToSuggest: 5, //number of options to show in autosuggest list. If 0, all results are shown.
 	
-	separators: [',', ' ', '.'], 	// trigger characters to separate tokens. 
-				  	// 	Use [',', '.'] to allow multiple words per tag.
+
+	xContent: '&times;', 	// content of the delete button
+	namespace: 'tknz', 		// used as class prefix for your CSS-styling pleasure.
+	label: 'Tags:', 		// label at top of input
+	placeholder: '', 		// placeholder text shown inside the input
+
+	
+	separators: [',', ' ', '.'],	// trigger characters to separate tokens. 
+				  					// 	Use [',', '.'] to allow multiple words per tag.
 				  	
 	callback: function () {} 	// function to call when the token list changes. 
-					// 	The $(input) element is included as a parameter.
+								// 	The $(input) element is included as a parameter.
+
+	onclick: function (word) {)		// Function to call when a token is clicked. Token text is passed as only parameter.
 }
 ```
 
