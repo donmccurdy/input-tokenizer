@@ -75,11 +75,11 @@ Available options:
 
 ```javascript
 {
-	source: null, 	// autosuggest options. May be a method or a function.
-					// If a function is given, it should take parameters: 
+	source: null, 	// autosuggest options. May be an array or a function.
+					// If a function is given, it should take two parameters: 
 					// the first will be the input word, the second is a function which should be called
 					// with a list of terms to suggest. (If you're using Ajax, call this function after your 
-					// response from the server is received.)
+					// response from the server is received, passing an array as the only parameter.)
 
 	allowUnknownTags: true, // if false, prevents user from creating tags not on the autosuggest list
 	numToSuggest: 5, //number of options to show in autosuggest list. If 0, all results are shown.
