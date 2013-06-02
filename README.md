@@ -97,7 +97,8 @@ Available options:
 	callback: function () {} 	// function to call when the token list changes. 
 								// 	The $(input) element is included as a parameter.
 
-	onclick: function (word) {)		// Function to call when a token is clicked. Token text is passed as only parameter.
+	onclick: function (word) {} 	// Function to call when a token is clicked. 
+									// Token text is passed as only parameter.
 }
 ```
 
