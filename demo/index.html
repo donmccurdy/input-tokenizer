@@ -20,14 +20,47 @@
 	        <a href="https://github.com/donmccurdy/input-tokenizer">Fork me on GitHub</a>
 	    </div>
 	</div>
+	<header>
+		<h1>Tag / Token Input</h1>
+		<h2>Lightweight (1.6kb gzipped) jQuery plugin with optional autosuggest support.</h2> 
+	</header>
 	<section class="main">   
 		
 		<input id="targetInput" type="text">
 		
 	</section>
+	<section class="description">
+		<h3>Full Readme</h3>
+		<ul>
+			<li><p>See <a href="https://github.com/donmccurdy/input-tokenizer">GitHub</a>.</p></li>
+		</ul>
+
+		<h3>Options</h3>
+		<ul>
+			<li><span class="li-head">source</span> &ndash; An array or method providing a list of words, if you want to use the autosuggest feature.</li>
+			<li><span class="li-head">allowUnknownTags</span> &ndash; If autosuggest is enabled, prevents user from creating tags not on the list.</li>
+			<li><span class="li-head">numToSuggest</span> &ndash; Max number of items to show in autosuggest list.</li>
+			<li><span class="li-head">namespace</span> &ndash; Customized prefix for all generated HTML, for your CSS-styling pleasure.</li>
+			<li><span class="li-head">label</span> &ndash; Title of the input.</li>
+			<li><span class="li-head">placeholder</span> &ndash; Input placeholder text.</li>
+			<li><span class="li-head">separators</span> &ndash; Break tokens on any characters you like. Include ' ' to prevent multiple words per tag.</li>
+			<li><span class="li-head">callback</span> &ndash; Function to call when token list is updated.</li>
+			<li><span class="li-head">xContent</span> &ndash; Content of the 'delete tag' button.</li>
+			<li><span class="li-head">onclick</span> &ndash; Function to call when a token is clicked. Token text is given as a parameter.</li>
+		</ul>
+
+		<h3>Disclaimer</h3>
+		<ul>
+			<li>Created by Don McCurdy, open source under MIT License.</li>
+			<li>Updated 2013.</li>
+		</ul>
+	</section>
 
 	<script type="text/javascript">
-		window.tokenInput = $('#targetInput').tokenizer({});
+		window.tokenInput = $('#targetInput').tokenizer({
+			onclick: function (word) { alert(word); },
+			source: ['one', 'two', 'three','four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
+		});
 	</script>
 
 </body>

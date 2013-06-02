@@ -53,6 +53,7 @@
     float: left;
     border-radius: 4px;
     max-width: 340px;
+    cursor: pointer;
 }
 
 .tknz-token-label { /* Token's label */
@@ -60,7 +61,6 @@
 }
 
 .tknz-token-x { /* Delete button for token */
-    cursor: pointer;
     color: rgba(255,255,255, 0.5);
     padding-left: 7px;
 }
