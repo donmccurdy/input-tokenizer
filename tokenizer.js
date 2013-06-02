@@ -20,7 +20,7 @@
 				separators: [',', ' ', '.'],
 				callback: null,
 				source: ['one','two','three','four','five'],
-				allowUnknownTags: true,
+				allowUnknownTags: false,
 				numToSuggest: 5
 			}, argOpts);
 
@@ -39,11 +39,13 @@
 		  	suggestions = $('<div class="'+ns+'-suggest"><ul></ul></div>');
 			wrap = input
 				.addClass(ns+'-input')
+				.wrap('<span class="'+ns+'-input-wrapper"></span>')
+				.parent()
 			 	.wrap('<div class="'+ns+'-wrapper"></div>')
 			 	.parent()
 				.prepend(list)
 				.prepend('<span class="'+ns+'-wrapper-label">'+options.label+'</span>')
-				.append(suggestions);
+				.find('.'+ns+'-input-wrapper').append(suggestions).end();
 		};
 		bindEvents = function () {
 			var ns = options.namespace;
@@ -52,27 +54,42 @@
 					wrap.addClass(ns+'-focus');
 				}).on('blur.'+ns, 'input', function () { // On blur, un-stylize.
 					wrap.removeClass(ns+'-focus');
-					if (input.val()) { 
-						push(input.val()); 
-						input.val('');
-						callback();
-					}
+					tryPush(input.val());
 				}).on('keydown.'+ns, 'input', function () { // Backspace handler.
 			 		if (event.which === 8 && !input.val()) {
 						pop();
 						callback();
+						return;
+					} 
+					var 
+						selectClass = ns+'-sel',
+						selected = suggestions.find('.'+selectClass);
+						
+					if (event.which === 38) { // Up
+						event.preventDefault();
+						if (selected.length) {
+							selected.removeClass(selectClass)
+								.prev('li').add(selected.siblings().last()).eq(0).addClass(selectClass);
+						} else {
+							suggestions.find('li').last().addClass(selectClass);
+						}
+					} else if (event.which === 40) { // Down
+						event.preventDefault();
+						if (selected.length) {
+							selected.removeClass(selectClass)
+								.next('li').addClass(selectClass);
+						} else {
+							suggestions.find('li').first().addClass(selectClass);
+						}
 					}
 		  		}).on('keypress.'+ns, 'input', function (event) { // Input listener to create tokens.
 			 		var val = input.val();
 					if (options.separators.indexOf(String.fromCharCode(event.which)) > -1 || event.which === 13) {
 						event.preventDefault();
 						tryPush(val);
-					} else if (event.which === 38) { // Up
-						console.log('up');
-					} else if (event.which === 40) { // Down
-						console.log('down');
 					}
 				}).on('keyup.'+ns, 'input', function (event) {
+					if (event.which === 38 || event.which === 40) { return; }
 					if ($.isArray(options.source)) { // Autosuggest from list
 						suggest(input.val(), options.source);
 					} else if (options.source) { // Autosuggest from function
@@ -86,7 +103,7 @@
 				}).on('click.'+ns, '.'+ns+'-suggest-li', function () {
 					input.val('');
 					push($(this).text());
-					suggestions.children('ul').empty().removeClass('.'+ns+'-vis');
+					suggest('', []);
 					callback();
 				});
 		};
@@ -98,6 +115,7 @@
 				input.val('');
 				callback();
 			}
+			suggest('', []);
 		};
 		push = function (value) {
 		  	var
@@ -149,6 +167,7 @@
 			}
 			suggestions.children('ul')
 				.html(list)
+				.end()
 				[list ? 'addClass' : 'removeClass']('.'+ns+'-vis');
 		};
 		getMatch = function () {
