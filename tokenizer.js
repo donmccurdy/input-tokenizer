@@ -14,6 +14,7 @@
 		list,
 		wrap,
 		suggestions,
+		eventQueue = $({}),
 		options = $.extend({
 			xContent: '&times;',
 			namespace: 'tknz',
@@ -58,8 +59,13 @@
 					wrap.addClass(ns+'-focus');
 				}).on('blur', 'input', function () { // On blur, un-stylize.
 					wrap.removeClass(ns+'-focus');
-					tryPush(input.val());
-				}).on('keydown', 'input', function () { // Backspace handler.
+					eventQueue.delay(200).queue().push(function () {
+						tryPush(input.val());
+						$.dequeue(this);
+					});
+				}).on('keydown', 'input', function (event) { // Backspace handler.
+					event = event || window.event;
+					event.which = event.which || event.keyCode || event.charCode;
 					if (event.which === 8 && !input.val()) {
 						pop();
 						callback();
@@ -86,13 +92,15 @@
 							suggestions.find('li').first().addClass(selectClass);
 						}
 					}
-		  		}).on('keypress', 'input', function (event) { // Input listener to create tokens.
-		  			if (options.separators.indexOf(String.fromCharCode(event.which)) > -1 || event.which === 13) {
-		  				event.preventDefault();
-		  				tryPush(input.val());
-		  			}
-		  		}).on('keyup', 'input', function (event) {
-		  			if (event.which === 38 || event.which === 40) { return; }
+				}).on('keypress', 'input', function (event) { // Input listener to create tokens.
+					if (options.separators.indexOf(String.fromCharCode(event.which)) > -1 || event.which === 13) {
+						event.preventDefault();
+						tryPush(input.val());
+					}
+				}).on('keyup', 'input', function (event) {
+					event = event || window.event;
+					event.which = event.which || event.keyCode || event.charCode;
+					if (event.which === 38 || event.which === 40) { return; }
 					if ($.isArray(options.source)) { // Autosuggest from list
 						suggest(options.source);
 					} else if (options.source) { // Autosuggest from function
@@ -105,6 +113,7 @@
 					$(this).closest('.'+ns+'-token').remove();
 					callback();
 				}).on('click', '.'+ns+'-suggest-li', function () {
+					$.queue(eventQueue, []); // cancel blur event
 					input.val('');
 					push($(this).text());
 					suggest([]);
@@ -242,4 +251,4 @@
 			$.error( 'Unknown tokenizer method ' +  method + '.' );
 		}    
 	};
-})(jQuery);
+}(jQuery));

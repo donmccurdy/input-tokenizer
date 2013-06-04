@@ -5,7 +5,7 @@ Tag / Token Input
 
 *Demo*: http://www.donmccurdy.com/sandbox/tag_editor/demo/
 
-*Size*: 1.6kb gzipped, 3.9kb minified.
+*Size*: 1.7kb gzipped, 4.1kb minified.
 
 *Dependencies*: jQuery 1.8-2.0+. (I haven't tested below 1.8, but it might work...)
 
