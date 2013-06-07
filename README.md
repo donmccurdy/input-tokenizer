@@ -94,8 +94,7 @@ Available options:
 	separators: [',', ' ', '.'],	// trigger characters to separate tokens. 
 				  					// 	Use [',', '.'] to allow multiple words per tag.
 				  	
-	callback: function () {} 	// function to call when the token list changes. 
-								// 	The $(input) element is included as a parameter.
+	callback: function ($input) {}, 	// function to call when the token list changes. 
 
 	onclick: function (word) {} 	// Function to call when a token is clicked. 
 									// Token text is passed as only parameter.
