@@ -115,6 +115,9 @@ $input.tokenizer('push', 'YOLO'); // adds 'YOLO' as a token.
 // 'pop' - Get the most recent token
 var lastToken = $input.tokenizer('pop'); // returns last token in list.
 
+// 'remove' - Manually remove a token
+$input.tokenizer('remove', 'YOLO'); // removes 'YOLO' from list.
+
 // 'empty' - Clear the input
 $input.tokenizer('empty'); // token list is now empty.
 

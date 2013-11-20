@@ -29,7 +29,7 @@
 		}, argOpts);
 
 		// PRIVATE METHODS
-		var init, buildHTML, bindEvents, push, pop, get, empty, 
+		var init, buildHTML, bindEvents, push, pop, remove, get, empty, 
 		destroy, callback, suggest, getMatch, tryPush, escapeRegExp;
 
 		init = function () {
@@ -149,6 +149,12 @@
 			pop = function () {
 				return list.children().last().detach().data('token') || null;
 			};
+			remove = function (value) {
+				var tokens = list.children().filter(function() { 
+					return $(this).data('token') == value;
+				}).detach();
+				return tokens.length > 0 ? (tokens.length == 1 ? tokens.data('token') : tokens.length) : null;
+			};
 			empty = function () {
 				list.empty();
 				return input;
@@ -202,6 +208,7 @@
 			return {
 				push: push,
 				pop: pop,
+				remove: remove,
 				empty: empty,
 				get: get,
 				destroy: destroy,
@@ -224,6 +231,9 @@
 		},
 		pop: function() { 
 			return this.data(tokenizer).pop();
+		},
+		remove: function(value) {
+			return this.data(tokenizer).remove(value);
 		},
 		empty : function() { 
 			return this.data(tokenizer).empty(); 
