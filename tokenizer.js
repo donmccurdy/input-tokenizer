@@ -1,7 +1,6 @@
+// Input Tokenizer
 // Author: Don McCurdy
 // Date: July, 2012
-
-/*********** INITIALIZATION ************/
 
 (function ($) {
 	var tokenizer = 'tokenizer';
