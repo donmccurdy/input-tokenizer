@@ -1,4 +1,4 @@
-Tag / Token Input [![stillmaintained](http://stillmaintained.com/donmccurdy/input-tokenizer.png)](http://stillmaintained.com/donmccurdy/input-tokenizer)
+Tag / Token Input
 ===============
 
 *Features*: Optional autosuggest, custom callbacks, easy setup, custom CSS prefixing.
