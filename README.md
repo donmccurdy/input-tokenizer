@@ -17,7 +17,7 @@ just wanted to do this myself, from scratch.
 
 Screenshot:
 
-![A screenshot of the input form.](http://www.donmccurdy.net/sandbox/tag_editor/demo/screenshot3.png)
+![A screenshot of the input form.](https://dl.dropboxusercontent.com/u/42869844/LTS/InputTokenizer%20v2.png)
 
 - - -
 
