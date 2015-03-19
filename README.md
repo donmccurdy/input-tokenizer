@@ -3,7 +3,7 @@ Tag / Token Input
 
 *Features*: Optional autosuggest, custom callbacks, easy setup, custom CSS prefixing.
 
-*Demo*: http://www.donmccurdy.com/sandbox/tag_editor/demo/
+*Demo*: *(temporarily unavailable)*
 
 *Size*: 1.7kb gzipped, 4.1kb minified.
 
