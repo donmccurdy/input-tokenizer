@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Input Tokenizer by donmccurdy</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Input Tokenizer</h1>
+        <p>jQuery plugin that allows a user to type keywords, which will be broken up into tokens/tags and displayed, similarly to tagging a post on Tumblr or Stack-Overflow.</p>
+
+        <p class="view"><a href="https://github.com/donmccurdy/input-tokenizer">View the Project on GitHub <small>donmccurdy/input-tokenizer</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/donmccurdy/input-tokenizer/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/donmccurdy/input-tokenizer/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/donmccurdy/input-tokenizer">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <ul>
+<li>
+<em>Features</em>: Optional autosuggest, custom callbacks, easy setup, custom CSS prefixing.</li>
+<li>
+<em>Size</em>: 1.7kb gzipped, 4.1kb minified.</li>
+<li>
+<em>Dependencies</em>: jQuery 1.8-2.0+. (I haven't tested below 1.8, but it might work...)</li>
+</ul>
+
+<p>It's what you'd expect to see when tagging a post on Tumblr or Stack-Overflow. Mostly, I 
+just wanted to do this myself, from scratch.</p>
+
+<hr>
+
+<h2>
+<a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting Started</h2>
+
+<p>To get started:</p>
+
+<ul>
+<li>You'll need jQuery and this plugin. jQuery should be included first, 
+and the path to the plugin will depend on where you put it. 
+For example, put this between the &lt;head&gt;&lt;/head&gt; tags of your HTML:</li>
+</ul>
+
+<div class="highlight highlight-html"><pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js<span class="pl-pds">"</span></span> &gt;&lt;/<span class="pl-ent">script</span>&gt;
+&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>tokenizer.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</pre></div>
+
+<ul>
+<li>Next, copy my sample CSS or tweak it to your needs, then include it as well:</li>
+</ul>
+
+<div class="highlight highlight-html"><pre>&lt;<span class="pl-ent">link</span> <span class="pl-e">rel</span>=<span class="pl-s"><span class="pl-pds">"</span>stylesheet<span class="pl-pds">"</span></span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/css<span class="pl-pds">"</span></span> <span class="pl-e">href</span>=<span class="pl-s"><span class="pl-pds">"</span>input_style.css<span class="pl-pds">"</span></span> /&gt;</pre></div>
+
+<ul>
+<li>Finally, call the plugin on your input at the end of your &lt;body&gt;&lt;/body&gt; tag 
+contents or once the page has loaded. If you've added the ".myTokenInput" class 
+to yours, you might do something like this:</li>
+</ul>
+
+<div class="highlight highlight-html"><pre><span class="pl-s1">&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span>&gt;</span>
+<span class="pl-s1">    <span class="pl-k">var</span> tokenInput <span class="pl-k">=</span> $(<span class="pl-s"><span class="pl-pds">'</span>input.myTokenInput<span class="pl-pds">'</span></span>).tokenizer({ <span class="pl-c">/* options */</span> });</span>
+<span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
+
+<ul>
+<li>You're done! Mess around with the CSS if you want to restyle things a bit.</li>
+</ul>
+
+<hr>
+
+<h2>
+<a id="methods-and-options" class="anchor" href="#methods-and-options" aria-hidden="true"><span class="octicon octicon-link"></span></a>Methods and Options</h2>
+
+<ul>
+<li>If you need to do real work with this plugin, you'll probably want to know the 
+methods and options. Here they are:</li>
+</ul>
+
+<div class="highlight highlight-javascript"><pre><span class="pl-c">// Initialize with default options</span>
+<span class="pl-k">var</span> $input <span class="pl-k">=</span> $(input).tokenizer({});
+
+<span class="pl-c">// Initialize with some custom options:</span>
+<span class="pl-k">var</span> options <span class="pl-k">=</span> {
+    <span class="pl-c">/* custom options here */</span>
+}
+$input2 <span class="pl-k">=</span> $(input2).tokenizer(options);
+</pre></div>
+
+<p>Available options:</p>
+
+<div class="highlight highlight-javascript"><pre>{
+    source<span class="pl-k">:</span> <span class="pl-c1">null</span>,   <span class="pl-c">// autosuggest options. May be an array or a function.</span>
+                    <span class="pl-c">// If a function is given, it should take two parameters: </span>
+                    <span class="pl-c">// the first will be the input word, the second is a function which should be called</span>
+                    <span class="pl-c">// with a list of terms to suggest. (If you're using Ajax, call this function after your </span>
+                    <span class="pl-c">// response from the server is received, passing an array as the only parameter.)</span>
+
+    allowUnknownTags<span class="pl-k">:</span> <span class="pl-c1">true</span>, <span class="pl-c">// if false, prevents user from creating tags not on the autosuggest list</span>
+    numToSuggest<span class="pl-k">:</span> <span class="pl-c1">5</span>, <span class="pl-c">//number of options to show in autosuggest list. If 0, all results are shown.</span>
+
+
+    xContent<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>&amp;times;<span class="pl-pds">'</span></span>,    <span class="pl-c">// content of the delete button</span>
+    namespace<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>tknz<span class="pl-pds">'</span></span>,      <span class="pl-c">// used as class prefix for your CSS-styling pleasure.</span>
+    label<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Tags:<span class="pl-pds">'</span></span>,         <span class="pl-c">// label at top of input</span>
+    placeholder<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>,        <span class="pl-c">// placeholder text shown inside the input</span>
+
+
+    separators<span class="pl-k">:</span> [<span class="pl-s"><span class="pl-pds">'</span>,<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span> <span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>.<span class="pl-pds">'</span></span>],    <span class="pl-c">// trigger characters to separate tokens. </span>
+                                    <span class="pl-c">//  Use [',', '.'] to allow multiple words per tag.</span>
+
+    <span class="pl-en">callback</span>: <span class="pl-k">function</span> (<span class="pl-smi">$input</span>) {},     <span class="pl-c">// function to call when the token list changes. </span>
+
+    <span class="pl-en">onclick</span>: <span class="pl-k">function</span> (<span class="pl-smi">word</span>) {}     <span class="pl-c">// Function to call when a token is clicked. </span>
+                                    <span class="pl-c">// Token text is passed as only parameter.</span>
+}</pre></div>
+
+<p>Available methods:</p>
+
+<div class="highlight highlight-javascript"><pre>
+<span class="pl-c">// 'get' - return list of tokens</span>
+<span class="pl-k">var</span> list <span class="pl-k">=</span> $input.tokenizer(<span class="pl-s"><span class="pl-pds">'</span>get<span class="pl-pds">'</span></span>);     <span class="pl-c">// ['unbought','stuffed','dogs']</span>
+
+<span class="pl-c">// 'push' - Manually add a token</span>
+$input.tokenizer(<span class="pl-s"><span class="pl-pds">'</span>push<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>YOLO<span class="pl-pds">'</span></span>); <span class="pl-c">// adds 'YOLO' as a token.</span>
+
+<span class="pl-c">// 'pop' - Get the most recent token</span>
+<span class="pl-k">var</span> lastToken <span class="pl-k">=</span> $input.tokenizer(<span class="pl-s"><span class="pl-pds">'</span>pop<span class="pl-pds">'</span></span>); <span class="pl-c">// returns last token in list.</span>
+
+<span class="pl-c">// 'remove' - Manually remove a token</span>
+$input.tokenizer(<span class="pl-s"><span class="pl-pds">'</span>remove<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>YOLO<span class="pl-pds">'</span></span>); <span class="pl-c">// removes 'YOLO' from list.</span>
+
+<span class="pl-c">// 'empty' - Clear the input</span>
+$input.tokenizer(<span class="pl-s"><span class="pl-pds">'</span>empty<span class="pl-pds">'</span></span>); <span class="pl-c">// token list is now empty.</span>
+
+<span class="pl-c">// 'destroy' - Un-tokenize the input (returns everything to pre-plugin state)</span>
+$input.tokenizer(<span class="pl-s"><span class="pl-pds">'</span>destroy<span class="pl-pds">'</span></span>); <span class="pl-c">// just an everyday input now.</span>
+
+<span class="pl-c">// 'callback' - Manually trigger the callback function</span>
+$input.tokenizer(<span class="pl-s"><span class="pl-pds">'</span>callback<span class="pl-pds">'</span></span>); <span class="pl-c">// triggers provided callback, if any.</span>
+
+</pre></div>
+
+<hr>
+
+<h2>
+<a id="other-notes" class="anchor" href="#other-notes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Other Notes</h2>
+
+<p>If this isn't what you need, there are other great options out there. Try these:</p>
+
+<ul>
+<li>
+<a href="http://aehlke.github.com/tag-it/">http://aehlke.github.com/tag-it/</a> (recommended)</li>
+<li><a href="http://xoxco.com/projects/code/tagsinput/">http://xoxco.com/projects/code/tagsinput/</a></li>
+<li><a href="http://loopj.com/jquery-tokeninput/">http://loopj.com/jquery-tokeninput/</a></li>
+<li><a href="http://tagedit.webwork-albrecht.de/">http://tagedit.webwork-albrecht.de/</a></li>
+</ul>
+
+<hr>
+
+<h2>
+<a id="open-source-license" class="anchor" href="#open-source-license" aria-hidden="true"><span class="octicon octicon-link"></span></a>Open Source License</h2>
+
+<p>Open source under MIT License (see below). I'd love to hear about it if you find a cool use for my code. Thanks! </p>
+
+<hr>
+
+<p>The MIT License (MIT)
+Copyright (c) 2013 Don McCurdy</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/donmccurdy">donmccurdy</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
