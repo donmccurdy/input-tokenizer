@@ -44,6 +44,7 @@
 .tknz-input-wrapper {
     float: left;
     position: relative;
+    top: 4px;
 }
 
 .tknz-token { /* An individual token */
