@@ -7,6 +7,13 @@
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <link rel="stylesheet" href="https://rawgithub.com/donmccurdy/input-tokenizer/master/input_style.css">
+    <style>
+      .tokenizer-demo.inactive {
+        display: none;
+      }
+    </style>
+
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -36,6 +43,8 @@
 <li>
 <em>Dependencies</em>: jQuery 1.8-2.0+. (I haven't tested below 1.8, but it might work...)</li>
 </ul>
+
+<input class="tokenizer-demo inactive" type="text">
 
 <p>It's what you'd expect to see when tagging a post on Tumblr or Stack-Overflow. Mostly, I 
 just wanted to do this myself, from scratch.</p>
@@ -189,6 +198,12 @@ Copyright (c) 2013 Don McCurdy</p>
       </footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
-    
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="https://rawgithub.com/donmccurdy/input-tokenizer/master/tokenizer.js"></script>
+    <script>
+      $('.tokenizer-demo')
+        .tokenizer()
+        .removeClass('inactive');
+    </script>
   </body>
 </html>
