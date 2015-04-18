@@ -1,6 +1,6 @@
 {
   "name": "input-tokenizer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://www.donmccurdy.com/input-tokenizer/",
   "authors": [
     "Don McCurdy <dm@donmccurdy.com>"
