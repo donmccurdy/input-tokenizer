@@ -1,0 +1,33 @@
+{
+  "name": "input-tokenizer",
+  "version": "1.0.0",
+  "description": "jQuery plugin that allows a user to type keywords, which will be broken up into tokens/tags and displayed, similarly to tagging a post on Tumblr or Stack-Overflow.",
+  "main": "tokenizer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/donmccurdy/input-tokenizer.git"
+  },
+  "keywords": [
+    "autocomplete",
+    "tag",
+    "ui",
+    "elements",
+    "autosuggest",
+    "text",
+    "input"
+  ],
+  "author": "Don McCurdy <dm@donmccurdy.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/donmccurdy/input-tokenizer/issues"
+  },
+  "homepage": "https://www.donmccurdy.com/input-tokenizer/",
+  "dependencies": {
+    "grunt": "^0.4.5",
+    "grunt-bump": "^0.3.0",
+    "grunt-contrib-uglify": "^0.9.1"
+  }
+}
