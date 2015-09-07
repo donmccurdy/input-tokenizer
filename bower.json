@@ -6,7 +6,7 @@
     "Don McCurdy <dm@donmccurdy.com>"
   ],
   "description": "jQuery plugin that allows a user to type keywords, which will be broken up into tokens/tags and displayed, similarly to tagging a post on Tumblr or Stack-Overflow.",
-  "main": "tokenizer.js",
+  "main": ["tokenizer.js", "input_style.css"],
   "keywords": [
     "autocomplete",
     "tag",
@@ -14,7 +14,12 @@
     "elements",
     "autosuggest",
     "text",
-    "input"
+    "input",
+    "jquery-plugin",
+    "ecosystem:jquery"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "^1.8.0"
+  }
 }
