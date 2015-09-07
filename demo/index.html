@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Input Tokenizer | Demo</title>
+		<style>
+			/* Set font styles and a neutral background color. */
+			html, body, h1 {
+				font-family: Roboto, Helvetica, sans-serif;
+				font-weight: 300;
+				background: #f0f0f0;
+				color: #606060;
+			}
+
+			/* Center content, with a bit of padding. */
+			main {
+				padding: 40px;
+				text-align: center;
+			}
+		</style>
+		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
+		<link rel="stylesheet" type="text/css" href="../input_style.css" />
+	</head>
+	<body>
+		<main>
+			<h1>Input Tokenizer | Demo</h1>
+			<input id="my-input" type="text">
+		</main>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="../tokenizer.js"></script>
+		<script>$('#my-input').tokenizer();</script>
+	</body>
+</html>
