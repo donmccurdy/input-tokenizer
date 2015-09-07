@@ -1,8 +1,13 @@
 // Input Tokenizer
 // Author: Don McCurdy
-// Date: July, 2012
 
-(function ($) {
+(function (factory) {
+	if(typeof module === 'object' && typeof module.exports === 'object') {
+		module.exports = factory(require('jquery'), window);
+	} else {
+		factory(jQuery, window);
+	}
+}(function ($, window, undefined) {
 	var tokenizer = 'tokenizer';
 
 	var Tokenizer = function (argElement, argOpts) {
@@ -150,9 +155,9 @@
 			};
 			remove = function (value) {
 				var tokens = list.children().filter(function() { 
-					return $(this).data('token') == value;
+					return $(this).data('token') == value; // jshint ignore:line
 				}).detach();
-				return tokens.length > 0 ? (tokens.length == 1 ? tokens.data('token') : tokens.length) : null;
+				return tokens.length > 0 ? (tokens.length === 1 ? tokens.data('token') : tokens.length) : null;
 			};
 			empty = function () {
 				list.empty();
@@ -220,10 +225,10 @@
 	var methods = {
 		init: function( options ) { 
 			if (this[0].nodeName !== 'INPUT') {
-				$.error('Tokenizer requires an <input type="text"> tag.');
+				console.error('Tokenizer requires an <input type="text"> tag.');
 				return this;
 			}
-			return this.data(tokenizer, Tokenizer(this, options));
+			return this.data(tokenizer, Tokenizer(this, options)); // jshint ignore:line
 		},
 		push: function(value) {
 			return this.data(tokenizer).push(value);
@@ -252,12 +257,14 @@
 	// EXPORT PLUGIN
 	$.fn[tokenizer] = function( method ) {
 		if ( methods[method] ) {
-			if (!this.data(tokenizer)) { $.error('Cannot call "'+method+'" - Tokenizer not initialized.'); }
+			if (!this.data(tokenizer)) { console.error('Cannot call "'+method+'" - Tokenizer not initialized.'); }
 			return methods[ method ].apply( this, Array.prototype.slice.call( arguments, 1 ));
 		} else if ( typeof method === 'object' || ! method ) {
 			return methods.init.apply( this, arguments );
 		} else {
-			$.error( 'Unknown tokenizer method ' +  method + '.' );
+			console.error( 'Unknown tokenizer method ' +  method + '.' );
 		}    
 	};
-}(jQuery));
+
+	return $.fn[tokenizer];
+}));
