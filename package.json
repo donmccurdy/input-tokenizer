@@ -1,6 +1,6 @@
 {
   "name": "input-tokenizer",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "jQuery plugin that allows a user to type keywords, which will be broken up into tokens/tags and displayed, similarly to tagging a post on Tumblr or Stack-Overflow.",
   "main": "tokenizer.js",
   "style": "input_style.css",
