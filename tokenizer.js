@@ -14,7 +14,7 @@
 
 		// PRIVATE VARS
 		var
-		input, 
+		input,
 		list,
 		wrap,
 		suggestions,
@@ -33,7 +33,7 @@
 		}, argOpts);
 
 		// PRIVATE METHODS
-		var init, buildHTML, bindEvents, push, pop, remove, get, empty, 
+		var init, buildHTML, bindEvents, push, pop, remove, get, empty,
 		destroy, callback, suggest, getMatch, tryPush, escapeRegExp;
 
 		init = function () {
@@ -64,7 +64,12 @@
 				}).on('blur', 'input', function () { // On blur, un-stylize.
 					wrap.removeClass(ns+'-focus');
 					eventQueue.delay(200).queue().push(function () {
-						tryPush(input.val());
+						// On blur, tag remaining text only if autocomplete is disabled.
+						if (options.source) {
+							suggest([], '');
+						} else {
+							tryPush(input.val());
+						}
 						$.dequeue(this);
 					});
 				}).on('keydown', 'input', function (event) { // Backspace handler.
@@ -74,8 +79,8 @@
 						pop();
 						callback();
 						return;
-					} 
-					var 
+					}
+					var
 					selectClass = ns+'-sel',
 					selected = suggestions.find('.'+selectClass);
 
@@ -110,30 +115,30 @@
 					} else if (options.source) { // Autosuggest from function
 						options.source(input.val(), suggest);
 					}
-				}).on('click', function () {	// On click, focus the input.
+				}).on('click', function () { // On click, focus the input.
 					input.focus();
 				}).on('click', '.'+ns+'-token-x', function (event) {
 					event.stopPropagation();
 					$(this).closest('.'+ns+'-token').remove();
 					callback();
-				}).on('click', '.'+ns+'-suggest-li', function () {
-					$.queue(eventQueue, []); // cancel blur event
+				}).on('mousedown', '.'+ns+'-suggest-li', function (e) {
+					e.preventDefault(); // Prevent blur event
 					input.val('');
 					push($(this).text());
 					suggest([]);
 					callback();
 				}).on('click', '.'+ns+'-token', function (event) {
-					if (options.onclick) { 
+					if (options.onclick) {
 						event.stopPropagation();
-						options.onclick($(this).children('.'+ns+'-token-label').text()); 
+						options.onclick($(this).children('.'+ns+'-token-label').text());
 					}
 				});
 			};
 
 			tryPush = function (value) {
 				var match = getMatch();
-				if (value && (options.allowUnknownTags || match)) { 
-					push(match || value); 
+				if (value && (options.allowUnknownTags || match)) {
+					push(match || value);
 					input.val('');
 					callback();
 				}
@@ -141,7 +146,7 @@
 			};
 			push = function (value) {
 				var
-				ns = options.namespace, 
+				ns = options.namespace,
 				pre = ns+'-token',
 				token = '<div class="'+pre+'" data-token="'+value+'">'+
 				'<span class="'+pre+'-label">'+value.trim()+'</span>'+
@@ -154,7 +159,7 @@
 				return list.children().last().detach().data('token') || null;
 			};
 			remove = function (value) {
-				var tokens = list.children().filter(function() { 
+				var tokens = list.children().filter(function() {
 					return $(this).data('token') == value; // jshint ignore:line
 				}).detach();
 				return tokens.length > 0 ? (tokens.length === 1 ? tokens.data('token') : tokens.length) : null;
@@ -164,9 +169,9 @@
 				return input;
 			};
 			get = function () {
-				var 
-				i, 
-				tokenList = [], 
+				var
+				i,
+				tokenList = [],
 				tokens = list.children();
 				for (i = 0; i < tokens.length; i++) {
 					tokenList.push(tokens.eq(i).data('token').toString());
@@ -184,8 +189,8 @@
 			};
 			suggest = function (words, word) {
 				word = word === undefined ? input.val() : word;
-				var 
-				i, 
+				var
+				i,
 				ns = options.namespace,
 				re1 = new RegExp(escapeRegExp(word), 'i'),
 				re2 = new RegExp('^'+escapeRegExp(word)+'$', 'i'),
@@ -223,7 +228,7 @@
 
 	// PUBLIC METHODS
 	var methods = {
-		init: function( options ) { 
+		init: function( options ) {
 			if (this[0].nodeName !== 'INPUT') {
 				console.error('Tokenizer requires an <input type="text"> tag.');
 				return this;
@@ -233,14 +238,14 @@
 		push: function(value) {
 			return this.data(tokenizer).push(value);
 		},
-		pop: function() { 
+		pop: function() {
 			return this.data(tokenizer).pop();
 		},
 		remove: function(value) {
 			return this.data(tokenizer).remove(value);
 		},
-		empty : function() { 
-			return this.data(tokenizer).empty(); 
+		empty : function() {
+			return this.data(tokenizer).empty();
 		},
 		get: function () {
 			return this.data(tokenizer).get();
@@ -263,7 +268,7 @@
 			return methods.init.apply( this, arguments );
 		} else {
 			console.error( 'Unknown tokenizer method ' +  method + '.' );
-		}    
+		}
 	};
 
 	return $.fn[tokenizer];
