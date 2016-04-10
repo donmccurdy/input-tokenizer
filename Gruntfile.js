@@ -18,7 +18,7 @@ module.exports = function (grunt) {
 			options: {
 				pushTo: 'origin',
 				files: ['package.json', 'bower.json'],
-				commitFiles: ['package.json', 'bower.json']
+				commitFiles: ['package.json', 'bower.json', 'tokenizer.min.js']
 			}
 		}
 
