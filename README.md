@@ -9,24 +9,18 @@ Tag / Token Input
 
 *Dependencies*: jQuery 1.8-2.0+. (I haven't tested below 1.8, but it might work...)
 
-jQuery plugin that stylizes an input and allows a user to type keywords, which will be 
-broken up into tokens/tags and displayed separately. 
-
-It's what you'd expect to see when tagging a post on Tumblr or Stack-Overflow. Mostly, I 
-just wanted to do this myself, from scratch.
+jQuery plugin that stylizes an input and allows a user to type keywords, which will be broken up into tokens/tags and displayed separately. It's what you'd expect to see when tagging a post on Tumblr or Stack-Overflow. Mostly, I just wanted to do this myself, from scratch.
 
 Screenshot:
 
 ![A screenshot of the input form.](https://cloud.githubusercontent.com/assets/1848368/7214289/eec96300-e559-11e4-92f2-3859b9f3fc00.png)
 
-- - -
-
 ## Getting Started
 
 To get started, here are the steps:
 
-* First, you'll need jQuery and my plugin. jQuery should be included first, 
-and the path to the plugin will depend on where you put it. 
+* First, you'll need jQuery and my plugin. jQuery should be included first,
+and the path to the plugin will depend on where you put it.
 For example, put this between the \<head\>\</head\> tags of your HTML:
 
 ```html
@@ -40,8 +34,8 @@ For example, put this between the \<head\>\</head\> tags of your HTML:
 <link rel="stylesheet" type="text/css" href="input_style.css" />
 ```
 
-* Finally, call the plugin on your input at the end of your \<body\>\</body\> tag 
-contents or once the page has loaded. If you've added the ".myTokenInput" class 
+* Finally, call the plugin on your input at the end of your \<body\>\</body\> tag
+contents or once the page has loaded. If you've added the ".myTokenInput" class
 to yours, you might do something like this:
 
 ```html
@@ -52,11 +46,9 @@ to yours, you might do something like this:
 
 * You're done! Mess around with the CSS if you want to restyle things a bit.
 
-- - -
-
 ## Methods and Options
 
-* If you need to do real work with this plugin, you'll probably want to know the 
+* If you need to do real work with this plugin, you'll probably want to know the
 methods and options. Here they are:
 
 ```javascript
@@ -76,27 +68,27 @@ Available options:
 ```javascript
 {
 	source: null, 	// autosuggest options. May be an array or a function.
-					// If a function is given, it should take two parameters: 
+					// If a function is given, it should take two parameters:
 					// the first will be the input word, the second is a function which should be called
-					// with a list of terms to suggest. (If you're using Ajax, call this function after your 
+					// with a list of terms to suggest. (If you're using Ajax, call this function after your
 					// response from the server is received, passing an array as the only parameter.)
 
 	allowUnknownTags: true, // if false, prevents user from creating tags not on the autosuggest list
 	numToSuggest: 5, //number of options to show in autosuggest list. If 0, all results are shown.
-	
+
 
 	xContent: '&times;', 	// content of the delete button
 	namespace: 'tknz', 		// used as class prefix for your CSS-styling pleasure.
 	label: 'Tags:', 		// label at top of input
 	placeholder: '', 		// placeholder text shown inside the input
 
-	
-	separators: [',', ' ', '.'],	// trigger characters to separate tokens. 
-				  					// 	Use [',', '.'] to allow multiple words per tag.
-				  	
-	callback: function ($input) {}, 	// function to call when the token list changes. 
 
-	onclick: function (word) {} 	// Function to call when a token is clicked. 
+	separators: [',', ' ', '.'],	// trigger characters to separate tokens.
+				  					// 	Use [',', '.'] to allow multiple words per tag.
+
+	callback: function ($input) {}, 	// function to call when the token list changes.
+
+	onclick: function (word) {} 	// Function to call when a token is clicked.
 									// Token text is passed as only parameter.
 }
 ```
@@ -126,11 +118,7 @@ $input.tokenizer('destroy'); // just an everyday input now.
 
 // 'callback' - Manually trigger the callback function
 $input.tokenizer('callback'); // triggers provided callback, if any.
-
-
 ```
-
-- - -
 
 ## Other Notes
 
@@ -141,13 +129,13 @@ If this isn't what you need, there are other great options out there. Try these:
 * http://loopj.com/jquery-tokeninput/
 * http://tagedit.webwork-albrecht.de/
 
-- - -
+## Contributors
+
+- Don McCurdy
+- Adam Skowron
+- Bob Frost
 
 ## Open Source License
-
-Open source under MIT License (see below). I'd love to hear about it if you find a cool use for my code. Thanks! 
-
-- - -
 
 The MIT License (MIT)
 Copyright (c) 2013 Don McCurdy
