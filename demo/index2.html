@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Input Tokenizer | Demo</title>
+		<style>
+			/* Set font styles and a neutral background color. */
+			html, body, h1 {
+				font-family: Roboto, Helvetica, sans-serif;
+				font-weight: 300;
+				background: #f0f0f0;
+				color: #606060;
+			}
+
+			/* Center content, with a bit of padding. */
+			main {
+				padding: 40px;
+				text-align: center;
+			}
+		</style>
+		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
+		<link rel="stylesheet" type="text/css" href="../input_style.css" />
+		<link rel="stylesheet" type="text/css" href="../input_style_select.css" />
+	</head>
+	<body>
+		<main>
+			<h1>Input Tokenizer | Demo 2 - select with additional features</h1>
+			<input id="my-input" type="text">
+		</main>
+
+		<div id="selected-tokens" style="clear:both"></div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="../tokenizer.js"></script>
+		<script>
+		// Map Object e.g. from WebService
+// 		var tokenizerData = {
+// 				"brown" : "Light brown fox",
+// 				"black" : "Dark black",
+// 				"red" : "Tango red",
+// 				"white" : "Silver white",
+// 				"blue" : "Deep blue sky",
+// 				"isisrot" : "Isisrot",
+// 				"beige" : "Beige",
+// 				"java" :  "Javagreun"
+// 		};
+		var tokenizerData = ["Tango red", "Silver white", "Deep blue sky", "Sunny yellow", "Sprint blue", "Javagreun", "Beige", "Malange", "Isisrot"];
+		var $tokenizer = $("#my-input").tokenizer({
+            source: tokenizerData,
+            numToSuggest: 0,
+            label:'',
+            allowDuplicates: false,
+			suggestDuplicates: false,
+			allowFullSearch: true,
+			fullSearchChar: '*',
+            selectedKeys: ['Tango red'],
+            callback: function($input){
+                var tokens = $tokenizer.tokenizer('get');
+                console.log(tokens);
+                $("#selected-tokens").html(tokens);
+            }
+        });
+
+		</script>
+	</body>
+</html>
