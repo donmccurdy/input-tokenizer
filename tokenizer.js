@@ -30,7 +30,8 @@
 			allowUnknownTags: true,
 			numToSuggest: 5,
 			onclick: null,
-			allowDuplicates: false
+			allowDuplicates: false,
+			suggestDuplicates: false
 		}, argOpts);
 
 		// PRIVATE METHODS
@@ -201,7 +202,7 @@
 				limit = options.numToSuggest || 1000,
 				list = [];
 				for (i = 0; word && i < words.length && list.length < limit; i++) {
-					if (!words[i].match(re1)) { continue; }
+					if (!words[i].match(re1) || (!options.suggestDuplicates && !isFirstOccurrence(words[i], i))) { continue; }
 					list.push('<li class="'+ns+'-suggest-li'+
 						(words[i].match(re2) ? ' '+ns+'-sel' : '')+'">'+words[i]+'</li>');
 				}
