@@ -3,7 +3,7 @@ Tag / Token Input
 
 *Features*: Optional autosuggest, custom callbacks, easy setup, custom CSS prefixing.
 
-*Demo*: [donmccurdy.com/input-tokenizer](https://www.donmccurdy.com/input-tokenizer/)
+*Demo*: [donmccurdy.github.io/input-tokenizer/](https://donmccurdy.github.io/input-tokenizer/)
 
 *Size*: 1.7kb gzipped, 4.1kb minified.
 
