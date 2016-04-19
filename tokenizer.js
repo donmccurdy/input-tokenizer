@@ -29,7 +29,8 @@
 			source: null,
 			allowUnknownTags: true,
 			numToSuggest: 5,
-			onclick: null
+			onclick: null,
+			allowDuplicates: false
 		}, argOpts);
 
 		// PRIVATE METHODS
@@ -145,14 +146,17 @@
 				suggest([], '');
 			};
 			push = function (value) {
-				var
-				ns = options.namespace,
-				pre = ns+'-token',
-				token = '<div class="'+pre+'" data-token="'+value+'">'+
-				'<span class="'+pre+'-label">'+value.trim()+'</span>'+
-				'<span class="'+pre+'-x">'+options.xContent+'</span>'+
-				'</div>';
-				list.append(token);
+				var firstOccurrence = isFirstOccurrence(value);
+	            if(options.allowDuplicates || firstOccurrence) {
+					var
+					ns = options.namespace,
+					pre = ns+'-token',
+					token = '<div class="'+pre+'" data-token="'+value+'">'+
+					'<span class="'+pre+'-label">'+value.trim()+'</span>'+
+					'<span class="'+pre+'-x">'+options.xContent+'</span>'+
+					'</div>';
+					list.append(token);
+	            }
 				return input;
 			};
 			pop = function () {
@@ -211,6 +215,15 @@
 			};
 			escapeRegExp = function (str) {
 				return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+			};
+			isFirstOccurrence = function(data) {
+			    var tokens = get();
+			    for (var i = 0; i < tokens.length; i++) {
+			        if (tokens[i] == data) {
+			            return false;
+			        }
+			    }
+				return true;
 			};
 
 			init (argElement);
