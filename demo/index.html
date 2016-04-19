@@ -28,6 +28,11 @@
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script src="../tokenizer.js"></script>
-		<script>$('#my-input').tokenizer();</script>
+		<script>
+		var tokenizerData = ["Tango red", "Silver white", "Deep blue sky", "Sunny yellow", "Sprint blue", "Javagreun", "Beige", "Malange", "Isisrot"];
+		$('#my-input').tokenizer({
+            source: tokenizerData,
+            numToSuggest: 0
+		});</script>
 	</body>
 </html>
