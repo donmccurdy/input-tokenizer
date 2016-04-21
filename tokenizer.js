@@ -30,8 +30,7 @@
 			allowUnknownTags: true,
 			numToSuggest: 5,
 			onclick: null,
-			allowDuplicates: false,
-			suggestDuplicates: false
+			allowDuplicates: false
 		}, argOpts);
 
 		// PRIVATE METHODS
@@ -202,7 +201,7 @@
 				limit = options.numToSuggest || 1000,
 				list = [];
 				for (i = 0; word && i < words.length && list.length < limit; i++) {
-					if (!words[i].match(re1) || (!options.suggestDuplicates && !isFirstOccurrence(words[i], i))) { continue; }
+					if (!words[i].match(re1) || (!options.allowDuplicates && !isFirstOccurrence(words[i], i))) { continue; }
 					list.push('<li class="'+ns+'-suggest-li'+
 						(words[i].match(re2) ? ' '+ns+'-sel' : '')+'">'+words[i]+'</li>');
 				}
@@ -218,13 +217,7 @@
 				return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
 			};
 			isFirstOccurrence = function(data) {
-			    var tokens = get();
-			    for (var i = 0; i < tokens.length; i++) {
-			        if (tokens[i] == data) {
-			            return false;
-			        }
-			    }
-				return true;
+			    return get().indexOf(data) >= 0;
 			};
 
 			init (argElement);
