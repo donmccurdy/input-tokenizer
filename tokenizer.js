@@ -29,7 +29,8 @@
 			source: null,
 			allowUnknownTags: true,
 			numToSuggest: 5,
-			onclick: null
+			onclick: null,
+			allowDuplicates: false
 		}, argOpts);
 
 		// PRIVATE METHODS
@@ -145,14 +146,17 @@
 				suggest([], '');
 			};
 			push = function (value) {
-				var
-				ns = options.namespace,
-				pre = ns+'-token',
-				token = '<div class="'+pre+'" data-token="'+value+'">'+
-				'<span class="'+pre+'-label">'+value.trim()+'</span>'+
-				'<span class="'+pre+'-x">'+options.xContent+'</span>'+
-				'</div>';
-				list.append(token);
+				var firstOccurrence = isFirstOccurrence(value);
+	            if(options.allowDuplicates || firstOccurrence) {
+					var
+					ns = options.namespace,
+					pre = ns+'-token',
+					token = '<div class="'+pre+'" data-token="'+value+'">'+
+					'<span class="'+pre+'-label">'+value.trim()+'</span>'+
+					'<span class="'+pre+'-x">'+options.xContent+'</span>'+
+					'</div>';
+					list.append(token);
+	            }
 				return input;
 			};
 			pop = function () {
@@ -197,7 +201,7 @@
 				limit = options.numToSuggest || 1000,
 				list = [];
 				for (i = 0; word && i < words.length && list.length < limit; i++) {
-					if (!words[i].match(re1)) { continue; }
+					if (!words[i].match(re1) || (!options.allowDuplicates && !isFirstOccurrence(words[i], i))) { continue; }
 					list.push('<li class="'+ns+'-suggest-li'+
 						(words[i].match(re2) ? ' '+ns+'-sel' : '')+'">'+words[i]+'</li>');
 				}
@@ -211,6 +215,9 @@
 			};
 			escapeRegExp = function (str) {
 				return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+			};
+			isFirstOccurrence = function(data) {
+			    return get().indexOf(data) >= 0;
 			};
 
 			init (argElement);
