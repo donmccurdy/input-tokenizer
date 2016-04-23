@@ -35,7 +35,8 @@
 
 		// PRIVATE METHODS
 		var init, buildHTML, bindEvents, push, pop, remove, get, empty,
-		destroy, callback, suggest, getMatch, tryPush, escapeRegExp;
+		destroy, callback, suggest, getMatch, tryPush, escapeRegExp,
+		isFirstOccurrence;
 
 		init = function () {
 			input = argElement;
@@ -214,10 +215,10 @@
 				return suggestions.find('.'+options.namespace+'-sel').eq(0).text();
 			};
 			escapeRegExp = function (str) {
-				return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+				return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
 			};
 			isFirstOccurrence = function(data) {
-			    return get().indexOf(data) >= 0;
+			    return get().indexOf(data) === -1;
 			};
 
 			init (argElement);
